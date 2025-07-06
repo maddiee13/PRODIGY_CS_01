@@ -1,0 +1,27 @@
+{
+    "basic": {
+        "name": "Basic Alphabet",
+        "chars": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+        "wrap": 26
+    },
+    "extended": {
+        "name": "Extended Character Set",
+        "chars": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?",
+        "wrap": 26
+    },
+    "alphanumeric": {
+        "name": "Alphanumeric",
+        "chars": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+        "wrap": 36
+    },
+    "keyboard": {
+        "name": "Full Keyboard",
+        "chars": "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+        "wrap": 94
+    },
+    "unicode": {
+        "name": "Unicode",
+        "chars": "",
+        "wrap": 1114112
+    }
+}

@@ -1,0 +1,14 @@
+#!/bin/bash
+# ShiftLock - Unified Caesar Cipher Tool
+
+# Check if running as root
+if [ "$(id -u)" -eq 0 ]; then
+    python_cmd="/usr/bin/python3"
+    script_path="/usr/share/shiftlock/shiftlock.py"
+else
+    python_cmd="python3"
+    script_path="$(dirname "$0")/../src/shiftlock.py"
+fi
+
+# Execute the Python script
+"$python_cmd" "$script_path" "$@"

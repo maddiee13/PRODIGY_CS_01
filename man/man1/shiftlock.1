@@ -1,0 +1,62 @@
+.TH SHIFTLOCK 1 "2023-08-20" "1.0" "ShiftLock Manual"
+.SH NAME
+shiftlock \- Caesar cipher encryption/decryption tool
+.SH SYNOPSIS
+.B shiftlock
+[\fIOPERATION\fR] [\fIOPTIONS\fR]
+.SH DESCRIPTION
+ShiftLock provides robust Caesar cipher encryption and decryption with support for multiple character sets.
+.SH OPERATIONS
+.TP
+.B encrypt
+Encrypt text using a specified shift value
+.TP
+.B decrypt
+Decrypt text using a specified shift value
+.TP
+.B bruteforce
+Test all possible shift values (1-25)
+.SH OPTIONS
+.TP
+.B \-t, \-\-text \fITEXT\fR
+Input text
+.TP
+.B \-f, \-\-file \fIFILE\fR
+Input file
+.TP
+.B \-s, \-\-shift \fIN\fR
+Shift value (default: 3, range: \-25 to 25)
+.TP
+.B \-\-charset \fISET\fR
+Character set: basic, extended, alphanumeric, keyboard, unicode (default: basic)
+.TP
+.B \-o, \-\-output \fIFILE\fR
+Output file
+.TP
+.B \-v, \-\-version
+Show version
+.TP
+.B \-h, \-\-help
+Show help message
+.SH EXAMPLES
+Encrypt text:
+.PP
+.B shiftlock encrypt -t "Secret Message" -s 7
+.PP
+Decrypt file:
+.PP
+.B shiftlock decrypt -f encrypted.txt -s 7 -o decrypted.txt
+.PP
+Brute-force decryption:
+.PP
+.B shiftlock bruteforce -f ciphertext.txt
+.SH FILES
+.I /usr/share/shiftlock/charsets.json
+.RS
+Character set definitions
+.RE
+.SH AUTHOR
+Maintained by the ShiftLock Project.
+.SH "SEE ALSO"
+.BR crypt (1),
+.BR gpg (1)
