@@ -23,20 +23,20 @@ run_test() {
 }
 
 # Basic encryption
-run_test "Basic encryption" "shiftlock encrypt -t 'HELLO' -s 3" "KHOOR"
+run_test "Basic encryption" "python src/Shiftlock.py encrypt -t 'HELLO' -s 3" "KHOOR"
 
 # Basic decryption
-run_test "Basic decryption" "shiftlock decrypt -t 'KHOOR' -s 3" "HELLO"
+run_test "Basic decryption" "python src/Shiftlock.py decrypt -t 'KHOOR' -s 3" "HELLO"
 
 # Extended character set
-run_test "Extended charset" "shiftlock encrypt -t 'ABC123' -s 3 --charset=extended" "DEF456"
+run_test "Extended charset" "python src/Shiftlock.py encrypt -t 'ABC123' -s 3 --charset=extended" "DEF456"
 
 # Alphanumeric
-run_test "Alphanumeric" "shiftlock encrypt -t 'TEST123' -s 5 --charset=alphanumeric" "YJXY678"
+run_test "Alphanumeric" "python src/Shiftlock.py encrypt -t 'TEST123' -s 5 --charset=alphanumeric" "YJXY678"
 
 # File handling
 echo "Secret text" > test_input.txt
-shiftlock encrypt -f test_input.txt -s 7 -o test_encrypted.txt
+python src/Shiftlock.py encrypt -f test_input.txt -s 7 -o test_encrypted.txt
 run_test "File encryption" "cat test_encrypted.txt" "Zlzjyl aoha"
 
 # Cleanup

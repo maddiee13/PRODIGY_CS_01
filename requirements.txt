@@ -1,0 +1,12 @@
+# To install requirements (if needed):
+# pip install -r requirements.txt
+#
+# Note: All modules listed below are from the Python standard library.
+# No external packages are required for ShiftLock.
+# This file is provided for completeness and virtual environment compatibility.
+argparse
+json
+sys
+os
+pathlib
+tkinter 

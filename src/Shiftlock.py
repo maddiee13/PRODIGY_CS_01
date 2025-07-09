@@ -7,28 +7,65 @@ from pathlib import Path
 
 # Load character sets
 def load_charsets():
-    data_dir = Path('/usr/share/shiftlock') if os.geteuid() == 0 else Path(__file__).parent.parent / 'data'
-    with open(data_dir / 'charsets.json', 'r') as f:
-        return json.load(f)
+    # Cross-platform way to check if running as root/admin
+    try:
+        is_admin = os.getuid() == 0 if hasattr(os, 'getuid') else False
+    except:
+        is_admin = False
+    
+    if is_admin:
+        data_dir = Path('/usr/share/shiftlock')
+    else:
+        data_dir = Path(__file__).parent.parent / 'data'
+    
+    # Try both possible filenames
+    charset_file = data_dir / 'charsets.json'
+    if not charset_file.exists():
+        charset_file = data_dir / 'character.json'
+    
+    try:
+        with open(charset_file, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print(f"Error: Character set file not found at {charset_file}", file=sys.stderr)
+        sys.exit(1)
+    except json.JSONDecodeError as e:
+        print(f"Error: Invalid JSON in character set file: {e}", file=sys.stderr)
+        sys.exit(1)
 
 # Caesar cipher implementation
 def shift_text(text: str, shift: int, charset: str = "basic") -> str:
     charsets = load_charsets()
     charset_data = charsets.get(charset, charsets['basic'])
     chars = charset_data['chars']
-    wrap = charset_data['wrap']
     
-    result = []
-    for char in text:
-        if char in chars:
-            idx = chars.index(char)
-            new_idx = (idx + shift) % wrap
-            if new_idx < 0:
-                new_idx += wrap
-            result.append(chars[new_idx])
-        else:
-            result.append(char)
-    return ''.join(result)
+    if charset == 'basic':
+        upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        lower = 'abcdefghijklmnopqrstuvwxyz'
+        result = []
+        for char in text:
+            if char in upper:
+                idx = upper.index(char)
+                new_idx = (idx + shift) % 26
+                result.append(upper[new_idx])
+            elif char in lower:
+                idx = lower.index(char)
+                new_idx = (idx + shift) % 26
+                result.append(lower[new_idx])
+            else:
+                result.append(char)
+        return ''.join(result)
+    else:
+        wrap = len(chars)
+        result = []
+        for char in text:
+            if char in chars:
+                idx = chars.index(char)
+                new_idx = (idx + shift) % wrap
+                result.append(chars[new_idx])
+            else:
+                result.append(char)
+        return ''.join(result)
 
 # Main CLI function
 def main():

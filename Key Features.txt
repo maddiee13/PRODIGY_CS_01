@@ -1,21 +1,24 @@
 Key Features
-1.Self-contained Installation:
+1. Cross-Platform Compatibility:
+	Works on both Linux and Windows
+	Automatic detection of platform-specific features
+2. Self-contained Installation:
 	Automatic dependency handling
 	Single-command setup and removal
-	Filesystem Hierarchy Standard (FHS) compliant
-2.Advanced Character Sets:
-	5 predefined character sets
+	Filesystem Hierarchy Standard (FHS) compliant (Linux)
+3. Advanced Character Sets:
+	5 predefined character sets (basic, extended, alphanumeric, keyboard, unicode)
 	Custom wrap-around logic for each set
 	Unicode support
-3.Robust Error Handling:
+4. Robust Error Handling:
 	Input validation
 	File operation safeguards
 	Clear error messages
-4.Linux Integration:
-	Man page documentation
-	System-wide installation
-	Proper exit codes
-5.Testing Framework:
+	Graceful handling of missing files and invalid input
+5. Correct Caesar Cipher Logic:
+	Separate shifting for uppercase and lowercase in basic mode
+	Accurate wrap-around for all charsets
+6. Testing Framework:
 	Comprehensive test script
 	Automatic cleanup
 	Clear pass/fail reporting
